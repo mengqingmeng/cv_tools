@@ -14,9 +14,33 @@
    <string>Form</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
+   <property name="leftMargin">
+    <number>2</number>
+   </property>
+   <property name="topMargin">
+    <number>2</number>
+   </property>
+   <property name="rightMargin">
+    <number>2</number>
+   </property>
+   <property name="bottomMargin">
+    <number>2</number>
+   </property>
    <item>
     <widget class="QWidget" name="widget" native="true">
      <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,5">
+      <property name="leftMargin">
+       <number>2</number>
+      </property>
+      <property name="topMargin">
+       <number>2</number>
+      </property>
+      <property name="rightMargin">
+       <number>2</number>
+      </property>
+      <property name="bottomMargin">
+       <number>2</number>
+      </property>
       <item>
        <widget class="QToolBox" name="leftMenu">
         <property name="sizePolicy">
@@ -34,14 +58,17 @@
            <x>0</x>
            <y>0</y>
            <width>260</width>
-           <height>347</height>
+           <height>351</height>
           </rect>
          </property>
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="contextMenuPolicy">
+          <enum>Qt::DefaultContextMenu</enum>
          </property>
          <property name="layoutDirection">
           <enum>Qt::LeftToRight</enum>
@@ -86,8 +113,8 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>112</width>
-           <height>347</height>
+           <width>132</width>
+           <height>351</height>
           </rect>
          </property>
          <property name="sizePolicy">

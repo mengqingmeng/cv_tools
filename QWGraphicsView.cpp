@@ -20,6 +20,17 @@ QWGraphicsView::QWGraphicsView(QWidget* parent)
     setInteractive(true);
     setMouseTracking(true);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+    //setSceneRect(0,0,this->size().width(),this->size().height());
+}
+
+void QWGraphicsView::showImg(const cv::Mat &inImage)
+{
+    scene->clear();
+
+    QPixmap pixmap = ImgUtils::matToQPixmap(inImage);
+    scene->addPixmap(pixmap);
+    scene->addRect(pixmap.rect(), QPen(Qt::darkGreen));
 }
 
 void QWGraphicsView::mouseMoveEvent(QMouseEvent* event)
@@ -38,5 +49,21 @@ void QWGraphicsView::mousePressEvent(QMouseEvent* event)
 		emit mouseClicked(posScaled);
 	}
 
-	QGraphicsView::mousePressEvent(event);
+    QGraphicsView::mousePressEvent(event);
+}
+
+void QWGraphicsView::wheelEvent(QWheelEvent *event)
+{
+    if (event->modifiers() & Qt::ControlModifier)
+    {
+        // 缩放视图
+        double scale = std::pow(1.0015, event->angleDelta().y());
+        this->scale(scale, scale);
+        event->accept();
+    }
+    else
+    {
+        QGraphicsView::wheelEvent(event);
+    }
+
 }

@@ -12,6 +12,7 @@ SOURCES += \
     AlgLineDetection.cpp \
     AlgLineFit.cpp \
     AlgsPage.cpp \
+    ImgUtils.cpp \
     QWGraphicsView.cpp \
     main.cpp \
     MainWindow.cpp
@@ -20,6 +21,7 @@ HEADERS += \
     AlgLineDetection.h \
     AlgLineFit.h \
     AlgsPage.h \
+    ImgUtils.h \
     MainWindow.h \
     QWGraphicsView.h
 

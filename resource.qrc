@@ -5,5 +5,9 @@
         <file alias="logo.icns">images/logo.icns</file>
         <file>images/objectDetection.png</file>
         <file>images/feature.png</file>
+        <file>images/algs.png</file>
+        <file>images/DL.png</file>
+        <file>images/flows.png</file>
+        <file>images/tools.png</file>
     </qresource>
 </RCC>
