@@ -28,9 +28,9 @@ void QWGraphicsView::showImg(const cv::Mat &inImage)
 {
     scene->clear();
 
-    QPixmap pixmap = ImgUtils::matToQPixmap(inImage);
-    scene->addPixmap(pixmap);
-    scene->addRect(pixmap.rect(), QPen(Qt::darkGreen));
+    m_qImage = ImgUtils::matToQImage(inImage);
+    scene->addPixmap(QPixmap::fromImage(m_qImage));
+    scene->addRect(m_qImage.rect(), QPen(Qt::darkGreen));
 }
 
 void QWGraphicsView::mouseMoveEvent(QMouseEvent* event)
@@ -45,8 +45,18 @@ void QWGraphicsView::mousePressEvent(QMouseEvent* event)
 {
 	if (event->button() == Qt::LeftButton) {
 		QPointF pos = mapToScene(event->pos());
-		QPointF posScaled(static_cast<float>(pos.x()) / sceneRect().width(), static_cast<float>(pos.y()) / sceneRect().height());
-		emit mouseClicked(posScaled);
+        QPointF posScaled(static_cast<float>(pos.x()) / sceneRect().width(), static_cast<float>(pos.y()) / sceneRect().height());
+
+        int x = posScaled.x();
+        int y = posScaled.y();
+        QRgb rgb = m_qImage.pixel(x, y);
+        QColor pointColor = QColor(rgb);
+        int blue = pointColor.blue();
+        int green = pointColor.green();
+        int red = pointColor.red();
+        int gray = qGray(rgb);
+
+        emit mouseClicked(MouseData(x,y,blue,green,red,gray));
 	}
 
     QGraphicsView::mousePressEvent(event);

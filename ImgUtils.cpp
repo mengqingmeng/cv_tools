@@ -13,6 +13,11 @@ QString ImgUtils::getLocalImgName()
 
 QPixmap ImgUtils::matToQPixmap(const cv::Mat &mat)
 {
+    return QPixmap::fromImage(matToQImage(mat));
+}
+
+QImage ImgUtils::matToQImage(const cv::Mat &mat)
+{
     // 8-bits unsigned, NO. OF CHANNELS=1
     if(mat.type() == CV_8UC1) {
         QImage image(mat.cols, mat.rows, QImage::Format_Indexed8);
@@ -27,7 +32,7 @@ QPixmap ImgUtils::matToQPixmap(const cv::Mat &mat)
             memcpy(pDest, pSrc, mat.cols);
             pSrc += mat.step;
         }
-        return QPixmap::fromImage(image);
+        return image;
     }
     // 8-bits unsigned, NO. OF CHANNELS=3
     else if(mat.type() == CV_8UC3) {
@@ -35,11 +40,11 @@ QPixmap ImgUtils::matToQPixmap(const cv::Mat &mat)
         const uchar *pSrc = (const uchar*)mat.data;
         // Create QImage with same dimensions as input Mat
         QImage image(pSrc, mat.cols, mat.rows, mat.step, QImage::Format_RGB888);
-        return QPixmap::fromImage(image.rgbSwapped());
+        return image.rgbSwapped();
     }
     else {
-        qDebug() << "ERROR: Mat could not be converted to QPixmap.";
-        return QPixmap();
+        qDebug() << "ERROR: Mat could not be converted to QImage.";
+        return QImage();
     }
 }
 

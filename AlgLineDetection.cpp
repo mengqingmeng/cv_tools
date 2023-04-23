@@ -42,27 +42,29 @@ void AlgLineDetection::connectSlots()
     // 检测类型变换
     connect(ui->houghP,&QRadioButton::clicked,this,[&](bool checked){
         enableInput(checked ? LineAlgType::PROBABILITY : LineAlgType::STANDARD);
+        processImg();
     });
     connect(ui->standardHough,&QRadioButton::clicked,this,[&](bool checked){
         enableInput(checked ? LineAlgType::STANDARD : LineAlgType::PROBABILITY);
+        processImg();
     });
 
     // 数值发生变化
-    connect(ui->cannyThreshold1,&QDoubleSpinBox::valueChanged,this,&AlgLineDetection::onPropsChange);
-    connect(ui->cannyThreshold2,&QDoubleSpinBox::valueChanged,this,&AlgLineDetection::onPropsChange);
+    connect(ui->cannyThreshold1,&QDoubleSpinBox::editingFinished,this,&AlgLineDetection::onPropsChange);
+    connect(ui->cannyThreshold2,&QDoubleSpinBox::editingFinished,this,&AlgLineDetection::onPropsChange);
     connect(ui->cannySobelVal,&QComboBox::currentIndexChanged,this,&AlgLineDetection::onPropsChange);
     connect(ui->cannyL2,&QCheckBox::clicked,this,&AlgLineDetection::onPropsChange);
 
-    connect(ui->lineRho,&QDoubleSpinBox::valueChanged,this,&AlgLineDetection::onPropsChange);
-    connect(ui->lineTheta,&QDoubleSpinBox::valueChanged,this,&AlgLineDetection::onPropsChange);
-    connect(ui->lineThreshold,&QSpinBox::valueChanged,this,&AlgLineDetection::onPropsChange);
-    connect(ui->lineSrn,&QDoubleSpinBox::valueChanged,this,&AlgLineDetection::onPropsChange);
-    connect(ui->lineStn,&QDoubleSpinBox::valueChanged,this,&AlgLineDetection::onPropsChange);
-    connect(ui->lineMinTheta,&QDoubleSpinBox::valueChanged,this,&AlgLineDetection::onPropsChange);
-    connect(ui->lineMaxTheta,&QDoubleSpinBox::valueChanged,this,&AlgLineDetection::onPropsChange);
+    connect(ui->lineRho,&QDoubleSpinBox::editingFinished,this,&AlgLineDetection::onPropsChange);
+    connect(ui->lineTheta,&QDoubleSpinBox::editingFinished,this,&AlgLineDetection::onPropsChange);
+    connect(ui->lineThreshold,&QSpinBox::editingFinished,this,&AlgLineDetection::onPropsChange);
+    connect(ui->lineSrn,&QDoubleSpinBox::editingFinished,this,&AlgLineDetection::onPropsChange);
+    connect(ui->lineStn,&QDoubleSpinBox::editingFinished,this,&AlgLineDetection::onPropsChange);
+    connect(ui->lineMinTheta,&QDoubleSpinBox::editingFinished,this,&AlgLineDetection::onPropsChange);
+    connect(ui->lineMaxTheta,&QDoubleSpinBox::editingFinished,this,&AlgLineDetection::onPropsChange);
 
-    connect(ui->lineMinLength,&QDoubleSpinBox::valueChanged,this,&AlgLineDetection::onPropsChange);
-    connect(ui->lineMaxLineGap,&QDoubleSpinBox::valueChanged,this,&AlgLineDetection::onPropsChange);
+    connect(ui->lineMinLength,&QDoubleSpinBox::editingFinished,this,&AlgLineDetection::onPropsChange);
+    connect(ui->lineMaxLineGap,&QDoubleSpinBox::editingFinished,this,&AlgLineDetection::onPropsChange);
 }
 
 void AlgLineDetection::processImg()

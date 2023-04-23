@@ -19,9 +19,10 @@ public:
 
 signals:
 	void mouseMovePoint(QPointF point);
-	void mouseClicked(QPointF point);
+    void mouseClicked(MouseData mouseData);
 
 private:
     QGraphicsScene* scene;
+    QImage m_qImage;
 };
 

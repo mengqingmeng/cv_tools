@@ -7,7 +7,7 @@ AlgsPage::AlgsPage(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle(tr("Algs"));
-    objectDetectionNames = {{tr("直线检测"),tr("直线拟合")}};
+    objectDetectionNames = {tr("基本操作"),tr("直线检测"),tr("直线拟合")};
     ui->objectDetectionItems->addItems(objectDetectionNames);
 
     initAlgsPage();
@@ -27,6 +27,7 @@ void AlgsPage::initAlgsPage()
 {
     algLineDetection = new AlgLineDetection(this);
     algLineFit = new AlgLineFit(this);
+
 
     ui->rightMainCon->addWidget(algLineDetection);
     ui->rightMainCon->addWidget(algLineFit);
