@@ -26,9 +26,11 @@ AlgsPage::~AlgsPage()
 
 void AlgsPage::initAlgsPage()
 {
+    algThreshold = new AlgThreshold(this);
     algLineDetection = new AlgLineDetection(this);
     algLineFit = new AlgLineFit(this);
 
+    ui->rightMainCon->addWidget(algThreshold);
     ui->rightMainCon->addWidget(algLineDetection);
     ui->rightMainCon->addWidget(algLineFit);
 }

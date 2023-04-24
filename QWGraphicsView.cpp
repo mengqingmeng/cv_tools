@@ -40,31 +40,49 @@ void QWGraphicsView::showImg(const QImage &inImage)
     scene->addRect(m_qImage.rect(), QPen(Qt::darkGreen));
 }
 
+void QWGraphicsView::showCursorInfo(const QPointF &point)
+{
+    MouseData mouseData;
+    getMouseData(point,mouseData);
+}
+
+void QWGraphicsView::getMouseData(const QPointF &pos, MouseData &mouseData)
+{
+    //QPointF posScaled(static_cast<float>(pos.x()) / sceneRect().width(), static_cast<float>(pos.y()) / sceneRect().height());
+
+    int x = pos.x();
+    int y = pos.y();
+    if(x > m_qImage.width() || x<0 || y < 0 || y>m_qImage.height()){
+        return;
+    }
+    QRgb rgb = m_qImage.pixel(x, y);
+    QColor pointColor = QColor(rgb);
+    int blue = pointColor.blue();
+    int green = pointColor.green();
+    int red = pointColor.red();
+    int gray = qGray(rgb);
+
+    mouseData = MouseData(x,y,blue,green,red,gray);
+}
+
 void QWGraphicsView::mouseMoveEvent(QMouseEvent* event)
 {
-	viewport()->setCursor(Qt::CrossCursor);
-	QPoint pos = event->pos();
-	emit mouseMovePoint(pos);
+    viewport()->setCursor(Qt::CrossCursor);
+    QPointF pos = mapToScene(event->pos());
+    MouseData mouseData;
+    getMouseData(pos,mouseData);
+    emit mouseMovePoint(mouseData);
 	QGraphicsView::mouseMoveEvent(event);
 }
 
 void QWGraphicsView::mousePressEvent(QMouseEvent* event)
 {
-	if (event->button() == Qt::LeftButton) {
-		QPointF pos = mapToScene(event->pos());
-        QPointF posScaled(static_cast<float>(pos.x()) / sceneRect().width(), static_cast<float>(pos.y()) / sceneRect().height());
+//	if (event->button() == Qt::LeftButton) {
+//		QPointF pos = mapToScene(event->pos());
 
-        int x = posScaled.x();
-        int y = posScaled.y();
-        QRgb rgb = m_qImage.pixel(x, y);
-        QColor pointColor = QColor(rgb);
-        int blue = pointColor.blue();
-        int green = pointColor.green();
-        int red = pointColor.red();
-        int gray = qGray(rgb);
-
-        emit mouseClicked(MouseData(x,y,blue,green,red,gray));
-	}
+//        MouseData mouseData;
+//        getMouseData(pos,mouseData);
+//	}
 
     QGraphicsView::mousePressEvent(event);
 }

@@ -11,8 +11,8 @@ struct MouseData
     MouseData() {x=0;y=0;blue=0;green = 0;red = 0;gray = 0;}
     MouseData(int _x,int _y,int _blue,int _green,int _red,int _gray)
         :x(_x),y(_y),blue(_blue),green(_green),red(_red),gray(_gray){}
-    QString toString(){
-        return QString("x:%1\t y:%2\t blue:%3\t green:%4\t red:%5\t gray:%6")
+    QString toString() const {
+        return QString("x:%1  y:%2  blue:%3  green:%4  red:%5  gray:%6")
             .arg(x)
             .arg(y)
             .arg(blue)

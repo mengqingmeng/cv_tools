@@ -5,6 +5,7 @@
 #include <QGraphicsScene>
 #include <opencv.hpp>
 #include "ImgUtils.h"
+#include <QGraphicsTextItem>
 
 class QWGraphicsView : public QGraphicsView
 {
@@ -17,13 +18,14 @@ public:
 	QWGraphicsView(QWidget* parent = 0);
     void showImg(const cv::Mat& inImage);
     void showImg(const QImage& inImage);
+    void showCursorInfo(const QPointF& point);
 
 signals:
-	void mouseMovePoint(QPointF point);
-    void mouseClicked(MouseData mouseData);
+    void mouseMovePoint(const MouseData& mouseData);
 
 private:
     QGraphicsScene* scene;
     QImage m_qImage;
+    void getMouseData(const QPointF& pos,MouseData& mouseData);
 };
 

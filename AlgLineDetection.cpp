@@ -20,7 +20,6 @@ AlgLineDetection::~AlgLineDetection()
 void AlgLineDetection::onPropsChange()
 {
     if(m_inImage.empty()){
-        ui->plainTextEdit->appendPlainText(ImgUtils::NONE_IMG_MSG);
     }else{
         // 根据参数对图像进行处理，并展示。
         processImg();
@@ -32,7 +31,6 @@ void AlgLineDetection::connectSlots()
     // 选择图像
     connect(ui->chooseBtn,&QPushButton::clicked,this,[&](){
         QString localImgName = ImgUtils::getLocalImgName();
-        ui->plainTextEdit->appendPlainText(tr("选择本地图片:%1").arg(localImgName));
         if(!localImgName.isEmpty()){ // 本地图片路径不为空
             m_inImage = cv::imread(localImgName.toStdString());
             processImg();
@@ -69,6 +67,7 @@ void AlgLineDetection::connectSlots()
 
 void AlgLineDetection::processImg()
 {
+    if(m_inImage.empty()) return;
     m_outImage = m_inImage.clone();
     cv::Mat showImage = m_inImage.clone();
 

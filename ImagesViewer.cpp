@@ -26,6 +26,11 @@ ImagesViewer::ImagesViewer(QWidget *parent) :
         ui->listView->selectionModel()->select(index, QItemSelectionModel::ClearAndSelect);
         ui->listView->viewport()->update();
     });
+
+    // show cursor point information
+    connect(ui->graphicsView,&QWGraphicsView::mouseMovePoint,this,[&](const MouseData& data){
+        ui->cursorInfoLabel->setText(data.toString());
+    });
 }
 
 ImagesViewer::~ImagesViewer()

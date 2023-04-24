@@ -7,6 +7,7 @@
 #include <QListWidget>
 #include "AlgLineDetection.h"
 #include "AlgLineFit.h"
+#include "AlgThreshold.h"
 
 namespace Ui {
 class AlgsPage;
@@ -23,6 +24,7 @@ public:
 private:
     Ui::AlgsPage *ui;
     QStringList objectDetectionNames;
+    AlgThreshold* algThreshold;
     AlgLineDetection* algLineDetection;
     AlgLineFit* algLineFit;
 
