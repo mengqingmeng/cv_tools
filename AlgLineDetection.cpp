@@ -126,12 +126,15 @@ void AlgLineDetection::processImg()
             pt1.y = cvRound(y0 + 1000*(a));
             pt2.x = cvRound(x0 - 1000*(-b));
             pt2.y = cvRound(y0 - 1000*(a));
-            line( showImage, pt1, pt2, cv::Scalar(0,255,0), 1, cv::LINE_AA);
+            line(showImage, pt1, pt2, cv::Scalar(0,255,0), 1, cv::LINE_AA);
         }
     }
 
-
-    ui->graphicsView->showImg(showImage);
+    ui->imagesViewer->showImages({
+        ImageName(m_inImage,tr("原图")),
+        ImageName(edge,tr("边缘检测")),
+        ImageName(showImage,tr("直线检测"))
+    });
 }
 
 void AlgLineDetection::enableInput(LineAlgType type)

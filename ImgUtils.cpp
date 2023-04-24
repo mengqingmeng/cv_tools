@@ -48,4 +48,10 @@ QImage ImgUtils::matToQImage(const cv::Mat &mat)
     }
 }
 
+QString ImgUtils::getCurFileName()
+{
+    QDateTime now_ts = QDateTime::currentDateTime();
+    return now_ts.toString("yyyy-MM-dd_HH-mm-ss_zzz");
+}
+
 const QString ImgUtils::NONE_IMG_MSG = tr("图像不存在");

@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowTitle(tr("cv_tools"));
     setWindowIcon(QIcon("images/logo.png"));
 
-    m_algsPage = new AlgsPage(this);
+    m_algsPage = new AlgsPage();
 
     // algs btn clicked,show AlgsPage.
     connect(ui->algsPageBtn,&QPushButton::clicked,this,[&](){

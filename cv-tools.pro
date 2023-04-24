@@ -11,7 +11,11 @@ CONFIG += c++17
 SOURCES += \
     AlgLineDetection.cpp \
     AlgLineFit.cpp \
+    AlgThreshold.cpp \
     AlgsPage.cpp \
+    ImageItemDelegate.cpp \
+    ImageItemModel.cpp \
+    ImagesViewer.cpp \
     ImgUtils.cpp \
     QWGraphicsView.cpp \
     main.cpp \
@@ -20,7 +24,11 @@ SOURCES += \
 HEADERS += \
     AlgLineDetection.h \
     AlgLineFit.h \
+    AlgThreshold.h \
     AlgsPage.h \
+    ImageItemDelegate.h \
+    ImageItemModel.h \
+    ImagesViewer.h \
     ImgUtils.h \
     MainWindow.h \
     QWGraphicsView.h
@@ -28,7 +36,9 @@ HEADERS += \
 FORMS += \
     AlgLineDetection.ui \
     AlgLineFit.ui \
+    AlgThreshold.ui \
     AlgsPage.ui \
+    ImagesViewer.ui \
     MainWindow.ui
 
 TRANSLATIONS += \

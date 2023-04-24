@@ -16,6 +16,7 @@ protected:
 public:
 	QWGraphicsView(QWidget* parent = 0);
     void showImg(const cv::Mat& inImage);
+    void showImg(const QImage& inImage);
 
 signals:
 	void mouseMovePoint(QPointF point);

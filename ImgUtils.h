@@ -22,6 +22,13 @@ struct MouseData
     }
 };
 
+struct ImageName{
+    cv::Mat image;
+    QString name;
+    ImageName(){}
+    ImageName(cv::Mat _image,QString _name):image(_image),name(_name){}
+};
+
 class ImgUtils:public QObject
 {
     Q_OBJECT;
@@ -37,6 +44,8 @@ public:
 
     // cv::Mat 转QImage
     static QImage matToQImage(const cv::Mat& mat);
+
+    static QString getCurFileName();
 
 private:
     explicit ImgUtils(QObject *parent = nullptr);

@@ -28,7 +28,14 @@ void QWGraphicsView::showImg(const cv::Mat &inImage)
 {
     scene->clear();
 
-    m_qImage = ImgUtils::matToQImage(inImage);
+    QImage qImage = ImgUtils::matToQImage(inImage);
+    showImg(qImage);
+}
+
+void QWGraphicsView::showImg(const QImage &inImage)
+{
+    m_qImage = inImage;
+    scene->clear();
     scene->addPixmap(QPixmap::fromImage(m_qImage));
     scene->addRect(m_qImage.rect(), QPen(Qt::darkGreen));
 }

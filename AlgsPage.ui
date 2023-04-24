@@ -29,6 +29,9 @@
    <item>
     <widget class="QWidget" name="widget" native="true">
      <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,5">
+      <property name="spacing">
+       <number>2</number>
+      </property>
       <property name="leftMargin">
        <number>2</number>
       </property>
@@ -58,7 +61,7 @@
            <x>0</x>
            <y>0</y>
            <width>260</width>
-           <height>351</height>
+           <height>363</height>
           </rect>
          </property>
          <property name="sizePolicy">
@@ -113,8 +116,8 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>132</width>
-           <height>351</height>
+           <width>115</width>
+           <height>363</height>
           </rect>
          </property>
          <property name="sizePolicy">

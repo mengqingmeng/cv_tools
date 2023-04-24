@@ -6,8 +6,9 @@ AlgsPage::AlgsPage(QWidget *parent) :
     ui(new Ui::AlgsPage)
 {
     ui->setupUi(this);
-    setWindowTitle(tr("Algs"));
-    objectDetectionNames = {tr("基本操作"),tr("直线检测"),tr("直线拟合")};
+    setWindowTitle(tr("算法"));
+    setWindowFlags(Qt::Window | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint);
+    objectDetectionNames = {tr("二值化"),tr("直线检测"),tr("直线拟合")};
     ui->objectDetectionItems->addItems(objectDetectionNames);
 
     initAlgsPage();
@@ -27,7 +28,6 @@ void AlgsPage::initAlgsPage()
 {
     algLineDetection = new AlgLineDetection(this);
     algLineFit = new AlgLineFit(this);
-
 
     ui->rightMainCon->addWidget(algLineDetection);
     ui->rightMainCon->addWidget(algLineFit);
