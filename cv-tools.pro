@@ -17,6 +17,7 @@ SOURCES += \
     ImageItemModel.cpp \
     ImagesViewer.cpp \
     ImgUtils.cpp \
+    OptionsComponent.cpp \
     QWGraphicsView.cpp \
     main.cpp \
     MainWindow.cpp
@@ -31,6 +32,7 @@ HEADERS += \
     ImagesViewer.h \
     ImgUtils.h \
     MainWindow.h \
+    OptionsComponent.h \
     QWGraphicsView.h
 
 FORMS += \
@@ -39,7 +41,8 @@ FORMS += \
     AlgThreshold.ui \
     AlgsPage.ui \
     ImagesViewer.ui \
-    MainWindow.ui
+    MainWindow.ui \
+    OptionsComponent.ui
 
 TRANSLATIONS += \
     cv-tools_zh_CN.ts

@@ -588,59 +588,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QGroupBox" name="groupBox_2">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>80</height>
-         </size>
-        </property>
-        <property name="title">
-         <string>操作</string>
-        </property>
-        <layout class="QGridLayout" name="gridLayout">
-         <property name="leftMargin">
-          <number>2</number>
-         </property>
-         <property name="topMargin">
-          <number>2</number>
-         </property>
-         <property name="rightMargin">
-          <number>2</number>
-         </property>
-         <property name="bottomMargin">
-          <number>2</number>
-         </property>
-         <item row="1" column="2">
-          <widget class="QPushButton" name="chooseBtn">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="focusPolicy">
-            <enum>Qt::NoFocus</enum>
-           </property>
-           <property name="text">
-            <string>选择图片</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
+       <widget class="OptionsComponent" name="optionsComponent" native="true"/>
       </item>
       <item>
        <spacer name="verticalSpacer">
@@ -665,6 +613,12 @@
    <class>ImagesViewer</class>
    <extends>QWidget</extends>
    <header location="global">imagesviewer.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>OptionsComponent</class>
+   <extends>QWidget</extends>
+   <header location="global">OptionsComponent.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <opencv.hpp>
 #include "ImgUtils.h"
+#include "OptionsComponent.h"
 
 namespace Ui {
 class AlgLineDetection;

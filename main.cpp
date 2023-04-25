@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     qRegisterMetaType<MouseData>("MouseData");
+    qRegisterMetaType<cv::Mat>("cv::Mat");
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();

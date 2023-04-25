@@ -29,10 +29,10 @@ void AlgLineDetection::onPropsChange()
 void AlgLineDetection::connectSlots()
 {
     // 选择图像
-    connect(ui->chooseBtn,&QPushButton::clicked,this,[&](){
-        QString localImgName = ImgUtils::getLocalImgName();
-        if(!localImgName.isEmpty()){ // 本地图片路径不为空
-            m_inImage = cv::imread(localImgName.toStdString());
+    connect(ui->optionsComponent,&OptionsComponent::onSelectImages,this,[&](std::vector<cv::Mat> images){
+
+        if(!images.empty()){ // 本地图片路径不为空
+            m_inImage = images.back();
             processImg();
         }
     });
