@@ -11,6 +11,11 @@ QString ImgUtils::getLocalImgName()
     return QFileDialog::getOpenFileName(nullptr,tr("打开图片"),".",tr("图片文件(*.png *.jpg *.jpeg *.bpm)"));
 }
 
+QStringList ImgUtils::getLocalImgNames()
+{
+    return QFileDialog::getOpenFileNames(nullptr,tr("打开图片"),".",tr("图片文件(*.png *.jpg *.jpeg *.bpm)"));
+}
+
 QPixmap ImgUtils::matToQPixmap(const cv::Mat &mat)
 {
     return QPixmap::fromImage(matToQImage(mat));

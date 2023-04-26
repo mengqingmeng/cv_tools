@@ -13,14 +13,15 @@ class OptionsComponent : public QWidget
     Q_OBJECT
 
 public:
-    explicit OptionsComponent(QWidget *parent = nullptr);
+    explicit OptionsComponent(QWidget *parent = nullptr,bool multiOpen = false);
     ~OptionsComponent();
 
 signals:
-    void onSelectImages(std::vector<cv::Mat> images);
+    void onSelectImages(const std::vector<cv::Mat>& images);
 
 private:
     Ui::OptionsComponent *ui;
+    bool m_multiOpenImages;
 };
 
 #endif // OPTIONSCOMPONENT_H

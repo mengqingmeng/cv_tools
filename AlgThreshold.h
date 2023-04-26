@@ -2,6 +2,10 @@
 #define ALGTHRESHOLD_H
 
 #include <QWidget>
+#include <opencv.hpp>
+#include <map>
+#include <QComboBox>
+#include "ImgUtils.h"
 
 namespace Ui {
 class AlgThreshold;
@@ -17,6 +21,17 @@ public:
 
 private:
     Ui::AlgThreshold *ui;
+
+    // threshold types map
+    std::map<std::string,int> thresholdTypes;
+    // adaptive threshold types map
+    std::map<std::string,int> autoThresholdTypes;
+
+    std::vector<cv::Mat> m_images;
+
+public slots:
+    // process and show images
+    void processImages();
 };
 
 #endif // ALGTHRESHOLD_H

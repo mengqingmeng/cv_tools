@@ -30,7 +30,7 @@
     <number>2</number>
    </property>
    <item>
-    <widget class="ImagesViewer" name="widget" native="true">
+    <widget class="ImagesViewer" name="imagesViewer" native="true">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>0</horstretch>
@@ -74,25 +74,24 @@
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QSlider" name="horizontalSlider">
+          <widget class="QSlider" name="thresholdValue">
            <property name="maximum">
             <number>255</number>
+           </property>
+           <property name="value">
+            <number>125</number>
            </property>
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="label_2">
-           <property name="text">
-            <string>最大值</string>
-           </property>
-          </widget>
-         </item>
          <item row="1" column="1">
-          <widget class="QSlider" name="horizontalSlider_2">
+          <widget class="QSlider" name="maxValue">
            <property name="maximum">
+            <number>255</number>
+           </property>
+           <property name="value">
             <number>255</number>
            </property>
            <property name="orientation">
@@ -107,8 +106,15 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="1">
-          <widget class="QComboBox" name="comboBox"/>
+         <item row="3" column="1">
+          <widget class="QComboBox" name="autoTypes"/>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>最大值</string>
+           </property>
+          </widget>
          </item>
          <item row="3" column="0">
           <widget class="QLabel" name="label_4">
@@ -117,32 +123,14 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="1">
-          <widget class="QComboBox" name="comboBox_2"/>
-         </item>
-         <item row="4" column="0">
-          <widget class="QLabel" name="label_5">
-           <property name="text">
-            <string>自动阈值</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1">
-          <widget class="QCheckBox" name="checkBox">
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
+         <item row="2" column="1">
+          <widget class="QComboBox" name="thresholdTypes"/>
          </item>
         </layout>
        </widget>
       </item>
       <item>
-       <widget class="QGroupBox" name="groupBox_2">
-        <property name="title">
-         <string>操作</string>
-        </property>
-       </widget>
+       <widget class="OptionsComponent" name="optionsCompon" native="true"/>
       </item>
      </layout>
     </widget>
@@ -154,6 +142,12 @@
    <class>ImagesViewer</class>
    <extends>QWidget</extends>
    <header location="global">imagesviewer.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>OptionsComponent</class>
+   <extends>QWidget</extends>
+   <header location="global">OptionsComponent.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

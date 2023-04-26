@@ -39,6 +39,9 @@ public:
     // 获取本地图片路径
     static QString getLocalImgName();
 
+    // 获取本地图片路径
+    static QStringList getLocalImgNames();
+
     // cv::Mat转成QPixmap
     static QPixmap matToQPixmap(const cv::Mat& mat);
 
