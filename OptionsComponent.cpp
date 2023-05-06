@@ -13,17 +13,26 @@ OptionsComponent::OptionsComponent(QWidget *parent,bool multiOpen) :
 
         if(multiOpen){
             QStringList list = ImgUtils::getLocalImgNames();
-            for(auto name : list){
+            for(auto& name : list){
                 if(!name.isEmpty()){ // 本地图片路径不为空
-                    cv::Mat image = cv::imread(name.toStdString());
-                    images.push_back(image);
+                    try{
+                        cv::Mat image = cv::imread(name.toStdString());
+                        images.push_back(image);
+                    }catch(const std::exception& e){
+                        qWarning() << "读取图片有误";
+                    }
+
                 }
             }
         }else{
             QString localImgName = ImgUtils::getLocalImgName();
             if(!localImgName.isEmpty()){ // 本地图片路径不为空
-                cv::Mat image = cv::imread(localImgName.toStdString());
-                images.push_back(image);
+                try{
+                    cv::Mat image = cv::imread(localImgName.toStdString());
+                    images.push_back(image);
+                }catch(const std::exception& e){
+                    qWarning() << "读取图片有误";
+                }
             }
         }
 

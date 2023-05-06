@@ -76,6 +76,9 @@
           <height>80</height>
          </size>
         </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
         <property name="text">
          <string>打开图片</string>
         </property>

@@ -32,8 +32,8 @@ AlgThreshold::AlgThreshold(QWidget *parent) :
         processImages();
     });
 
-    connect(ui->thresholdValue,&QSlider::valueChanged,this,&AlgThreshold::processImages);
-    connect(ui->maxValue,&QSlider::valueChanged,this,&AlgThreshold::processImages);
+    connect(ui->thresholdValue,&QSpinBox::editingFinished,this,&AlgThreshold::processImages);
+    connect(ui->maxValue,&QSpinBox::editingFinished,this,&AlgThreshold::processImages);
     connect(ui->thresholdTypes,&QComboBox::currentIndexChanged,this,&AlgThreshold::processImages);
     connect(ui->autoTypes,&QComboBox::currentIndexChanged,this,&AlgThreshold::processImages);
 }

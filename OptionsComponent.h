@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include "ImgUtils.h"
+#include <codecvt>
+#include <locale>
 
 namespace Ui {
 class OptionsComponent;
