@@ -12,7 +12,7 @@
 namespace Ui {
 class AlgsPage;
 }
-
+/// 算法
 class AlgsPage : public QDialog
 {
     Q_OBJECT
@@ -23,7 +23,9 @@ public:
 
 private:
     Ui::AlgsPage *ui;
-    QStringList objectDetectionNames;
+    QStringList baseOperateNames; // 基础操作名称
+    QStringList objectDetectionNames; // 目标检测算法名称
+    QStringList allNames;
     AlgThreshold* algThreshold;
     AlgLineDetection* algLineDetection;
     AlgLineFit* algLineFit;
