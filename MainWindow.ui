@@ -81,7 +81,7 @@
        </widget>
       </item>
       <item row="1" column="0">
-       <widget class="QPushButton" name="pushButton_3">
+       <widget class="QPushButton" name="dlPageBtn">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -89,7 +89,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>。。。</string>
+         <string>深度学习</string>
         </property>
         <property name="icon">
          <iconset resource="resource.qrc">
@@ -112,7 +112,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>。。。</string>
+         <string>流程</string>
         </property>
         <property name="icon">
          <iconset resource="resource.qrc">
@@ -136,7 +136,7 @@
      <x>0</x>
      <y>0</y>
      <width>682</width>
-     <height>24</height>
+     <height>39</height>
     </rect>
    </property>
   </widget>

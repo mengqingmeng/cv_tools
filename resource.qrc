@@ -9,5 +9,6 @@
         <file>images/DL.png</file>
         <file>images/flows.png</file>
         <file>images/tools.png</file>
+        <file>images/clear-l.png</file>
     </qresource>
 </RCC>

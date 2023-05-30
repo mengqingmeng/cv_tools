@@ -13,6 +13,7 @@ SOURCES += \
     AlgLineFit.cpp \
     AlgThreshold.cpp \
     AlgsPage.cpp \
+    DLPage.cpp \
     ImageItemDelegate.cpp \
     ImageItemModel.cpp \
     ImagesViewer.cpp \
@@ -20,26 +21,30 @@ SOURCES += \
     OptionsComponent.cpp \
     QWGraphicsView.cpp \
     main.cpp \
-    MainWindow.cpp
+    MainWindow.cpp \
+    myYolo.cpp
 
 HEADERS += \
     AlgLineDetection.h \
     AlgLineFit.h \
     AlgThreshold.h \
     AlgsPage.h \
+    DLPage.h \
     ImageItemDelegate.h \
     ImageItemModel.h \
     ImagesViewer.h \
     ImgUtils.h \
     MainWindow.h \
     OptionsComponent.h \
-    QWGraphicsView.h
+    QWGraphicsView.h \
+    myYolo.h
 
 FORMS += \
     AlgLineDetection.ui \
     AlgLineFit.ui \
     AlgThreshold.ui \
     AlgsPage.ui \
+    DLPage.ui \
     ImagesViewer.ui \
     MainWindow.ui \
     OptionsComponent.ui

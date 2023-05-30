@@ -4,7 +4,7 @@
 
 #include <QMainWindow>
 #include "AlgsPage.h"
-
+#include "DLPage.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -18,7 +18,8 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    AlgsPage* m_algsPage;
+    AlgsPage* m_algsPage; // 传统算法页面
+    DLPage* m_dlPage;   // 深度学习页面
 
 private:
     Ui::MainWindow *ui;
