@@ -5,6 +5,8 @@
 #include <QFileDialog>
 #include <QDateTime>
 #include <myYolo.h>
+#include <QMessageBox>
+#include "TimerLog.h"
 
 namespace Ui {
 class DLPage;
@@ -31,7 +33,10 @@ private:
     // 向文本框中新增日志
     void appendLog(const QString& str);
 
-    std::shared_ptr<MyYolo> yoloptr;
+    unique_ptr<MyYolo> yoloptr = nullptr;
+
+protected:
+    void closeEvent(QCloseEvent* e) override;
 };
 
 #endif // DLPAGE_H

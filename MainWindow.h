@@ -19,7 +19,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     AlgsPage* m_algsPage; // 传统算法页面
-    DLPage* m_dlPage;   // 深度学习页面
+    DLPage* m_dlPage;
 
 private:
     Ui::MainWindow *ui;

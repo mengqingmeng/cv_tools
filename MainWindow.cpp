@@ -12,7 +12,6 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowIcon(QIcon("images/logo.png"));
 
     m_algsPage = new AlgsPage(this);
-
     m_dlPage = new DLPage(this);
 
     // algs btn clicked,show AlgsPage.

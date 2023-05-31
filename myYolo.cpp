@@ -1,6 +1,11 @@
 #include <opencv2/opencv.hpp>
 #include "myYolo.h"
 
+MyYolo::~MyYolo()
+{
+    qDebug() << "my yolo 析构";
+}
+
 void MyYolo::onnxDetect(cv::Mat& image, std::vector<BoxItem>& results)
 {
     if (image.empty()) {
@@ -48,10 +53,10 @@ void MyYolo::onnxDetect(cv::Mat& image, std::vector<BoxItem>& results)
 
 	cv::Mat blob;
 	cv::dnn::blobFromImage(imgResized, blob, 1 / 255.0, cv::Size(netWidth, netHeight), cv::Scalar(0, 0, 0), true, false);
-	net.setInput(blob);
+    m_net.setInput(blob);
 	std::vector<cv::Mat> netOutputImg;
 	try {
-		net.forward(netOutputImg, net.getUnconnectedOutLayersNames());
+        m_net.forward(netOutputImg, m_net.getUnconnectedOutLayersNames());
 	}
     catch (cv::Exception& e) {
         qWarning() << QString::fromLocal8Bit("推理错误:%1").arg(QString::fromStdString(e.msg));
@@ -62,7 +67,7 @@ void MyYolo::onnxDetect(cv::Mat& image, std::vector<BoxItem>& results)
 	std::vector<int> classIds;//结果id数组
 	std::vector<float> confidences;//结果每个id对应置信度数组
 	std::vector<cv::Rect> boxes;//每个id矩形框
-	int net_width = config.numOfClass + 5;  //输出的网络宽度是类别数+5
+    int net_width = numOfClass + 5;  //输出的网络宽度是类别数+5
 	float* pdata = (float*)netOutputImg[0].data;
 	for (int stride = 0; stride < 3; stride++) {    //stride
         //int grid_x = (int)(netWidth / netStride[stride]);
@@ -76,7 +81,7 @@ void MyYolo::onnxDetect(cv::Mat& image, std::vector<BoxItem>& results)
 					// std::cout << "box score : " << box_score << std::endl;
 					if (box_score > config.confThreshold) {
 						//为了使用minMaxLoc(),将85长度数组变成Mat对象
-						cv::Mat scores(1, config.numOfClass, CV_32FC1, pdata + 5);
+                        cv::Mat scores(1, numOfClass, CV_32FC1, pdata + 5);
 						cv::Point classIdPoint;
 						double max_class_socre;
 						minMaxLoc(scores, 0, &max_class_socre, 0, &classIdPoint);
@@ -138,7 +143,7 @@ void MyYolo::setConfig(const CNNConfig cfg)
 
 void MyYolo::setNet(const cv::dnn::Net n)
 {
-	net = n;
+    m_net = n;
 }
 
 void MyYolo::getConfig(CNNConfig& cfg)
@@ -148,6 +153,6 @@ void MyYolo::getConfig(CNNConfig& cfg)
 
 void MyYolo::changeConf(float conf)
 {
-	config.confThreshold = conf;
+    config.confThreshold = conf;
 }
 

@@ -20,6 +20,7 @@ SOURCES += \
     ImgUtils.cpp \
     OptionsComponent.cpp \
     QWGraphicsView.cpp \
+    TimerLog.cpp \
     main.cpp \
     MainWindow.cpp \
     myYolo.cpp
@@ -37,6 +38,7 @@ HEADERS += \
     MainWindow.h \
     OptionsComponent.h \
     QWGraphicsView.h \
+    TimerLog.h \
     myYolo.h
 
 FORMS += \
@@ -72,12 +74,12 @@ unix:!macx{ # linux
 }
 
 win32{ #windows
-INCLUDEPATH += D:\softwares\opencv\4.7.0\build\include
-INCLUDEPATH += D:\softwares\opencv\4.7.0\build\include\opencv2
+INCLUDEPATH += D:\softwares\opencv\4.5.5G\include
+INCLUDEPATH += D:\softwares\opencv\4.5.5G\include\opencv2
     CONFIG(release, debug|release){
-        LIBS += -LD:/softwares/opencv/4.7.0/build/x64/vc16/lib/ -lopencv_world470
+        LIBS += -LD:/softwares/opencv/4.5.5G/x64/vc16/lib -lopencv_world455
     }else:CONFIG(debug, debug|release){
-        LIBS += -LD:/softwares/opencv/4.7.0/build/x64/vc16/lib/ -lopencv_world470d
+        LIBS += -LD:/softwares/opencv/4.5.5G/x64/vc16/lib -lopencv_world455
     }
 }
 

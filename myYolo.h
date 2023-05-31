@@ -41,6 +41,7 @@ class MyYolo {
 	
 
 public:
+    ~MyYolo();
 	void onnxDetect(cv::Mat& image, std::vector<BoxItem>& results);
 	void readNames(std::string& path, std::vector<std::string>& names);
 	void setConfig(const CNNConfig cfg);
@@ -51,5 +52,5 @@ private:
 	const float netAnchors[3][6] = { {10.0, 13.0, 16.0, 30.0, 33.0, 23.0}, {30.0, 61.0, 62.0, 45.0, 59.0, 119.0},{116.0, 90.0, 156.0, 198.0, 373.0, 326.0} };
 	const float netStride[3] = { 8.0, 16.0, 32.0 };
 	CNNConfig config;
-	cv::dnn::Net net;
+    cv::dnn::Net m_net;
 };
