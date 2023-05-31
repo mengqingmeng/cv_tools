@@ -1,11 +1,13 @@
-#pragma once
 /********************************************************************************
-** Form generated from reading UI file ''
+** Form generated from reading UI file 'DLPage.ui'
 **
 ** Created by: Qt User Interface Compiler version 6.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
+
+#ifndef UI_DLPAGE_H
+#define UI_DLPAGE_H
 
 #include <QWGraphicsView.h>
 #include <QtCore/QVariant>
@@ -208,7 +210,7 @@ public:
         gridLayout->addWidget(label_9, 5, 0, 1, 1);
 
         resourceSizeSpinBox = new QSpinBox(widget);
-        resourceSizeSpinBox->setObjectName("spinBox");
+        resourceSizeSpinBox->setObjectName("resourceSizeSpinBox");
         resourceSizeSpinBox->setMinimum(1);
         resourceSizeSpinBox->setMaximum(99999);
         resourceSizeSpinBox->setValue(640);
@@ -256,3 +258,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
+#endif // UI_DLPAGE_H

@@ -1,5 +1,6 @@
 #include "DLPage.h"
 #include "ui_DLPage.h"
+yolo::Image cvimg(const cv::Mat& image) { return yolo::Image(image.data, image.cols, image.rows); }
 
 DLPage::DLPage(QWidget *parent) :
     QDialog(parent),
@@ -35,7 +36,7 @@ void DLPage::connectSlots()
 
     // choose model btn
     connect(ui->chooseModelBtn,&QToolButton::clicked,this,[&](){
-        m_modelPath = QFileDialog::getOpenFileName(this,"open model",".",tr("Model Files (*.onnx)"));
+        m_modelPath = QFileDialog::getOpenFileName(this,"open model",".",tr("Model Files (*.onnx *.engine)"));
         if(!m_modelPath.isEmpty()){
             ui->chooseModelBtn->setText(m_modelPath);
         }
@@ -71,16 +72,18 @@ void DLPage::connectSlots()
 
         try{
             appendLog("初始化模型...");
-            yoloptr.reset(new MyYolo());
-            CNNConfig config;
-            config.confThreshold = ui->confSpinBox->value();
-            config.inputWidth = inputSize;
-            config.inputHeight = inputSize;
-            config.numOfClass = ui->labelsCombo->count();
-            yoloptr->setConfig(config);
+           
 
             QString referType = ui->referModeCombo->currentText();
             if(referType != "TensorRT"){ // opencv推理
+                yoloptr.reset(new MyYolo());
+                CNNConfig config;
+                config.confThreshold = ui->confSpinBox->value();
+                config.inputWidth = inputSize;
+                config.inputHeight = inputSize;
+                config.numOfClass = ui->labelsCombo->count();
+                yoloptr->setConfig(config);
+
                 cv::dnn::Net net = cv::dnn::readNet(m_modelPath.toStdString());
 
                 if( referType == "OPENCV::DEFAULT"){
@@ -95,7 +98,7 @@ void DLPage::connectSlots()
                 std::vector<BoxItem> forHotResult;
                 yoloptr->onnxDetect(forHot, forHotResult);
             }else{ // tensorRT推理
-
+                trtInfer = yolo::load(m_modelPath.toStdString(), yolo::Type::V5);
             }
 
             appendLog(QString("初始化模型%1成功，推理模式%2").arg(m_modelPath,ui->referModeCombo->currentText()));
@@ -114,40 +117,77 @@ void DLPage::connectSlots()
 
     // start detect
     connect(ui->startBtn,&QPushButton::clicked,this,[&](){
-        if(!yoloptr){
-            QMessageBox::warning(this,tr("提示"),tr("请初始化模型"));
-            return;
-        }
-
+        
         cv::RNG rng(time(0));
 
         int index = 0;
-        for(auto& source:m_sources){
-            ++ index;
-            TimerLog timerLog(QString("图片%1").arg(index),ui->logPlanText);
-            cv::Scalar color(rng.uniform(0,255),rng.uniform(0,255),rng.uniform(0,255));
-            try{
+
+        if (ui->referModeCombo->currentText().contains("OPENCV")) {
+            if (!yoloptr) {
+                QMessageBox::warning(this, tr("提示"), tr("请初始化模型"));
+                return;
+            }
+            for (auto& source : m_sources) {
+                ++index;
+                cv::Scalar color(rng.uniform(0, 255), rng.uniform(0, 255), rng.uniform(0, 255));
+                try {
+                    cv::Mat image = cv::imread(source.toStdString());
+                    cv::Mat outImage = image.clone();
+                    if (image.data) {
+                        TimerLog timerLog(QString("图片%1").arg(index), ui->logPlanText);
+                        std::vector<BoxItem> result;
+                        yoloptr->onnxDetect(image, result);
+                        for (auto& boxItem : result) {
+                            QString labelConf = QString("%1:%2")
+                                .arg(ui->labelsCombo->itemText(boxItem.label), QString::number(boxItem.conf, 'f', 2));
+
+                            cv::putText(outImage, labelConf.toStdString(),
+                                cv::Point(boxItem.box.x, boxItem.box.y - 20),
+                                cv::FONT_HERSHEY_SIMPLEX, 2, color, 4, cv::LINE_AA);
+
+                            cv::rectangle(outImage, boxItem.box, color, 4, cv::LINE_AA);
+
+                        }
+                    }
+                    ui->graphicsView->showImg(outImage);
+                }
+                catch (const std::exception& e) {
+                    appendLog(QString("推理失败：%1").arg(e.what()));
+                }
+            }
+        }
+        else {
+            if (!trtInfer) {
+                QMessageBox::warning(this, tr("提示"), tr("请初始化模型"));
+                return;
+            }
+            for (auto& source : m_sources) {
+                ++index;
+                cv::Scalar color(rng.uniform(0, 255), rng.uniform(0, 255), rng.uniform(0, 255));
+
                 cv::Mat image = cv::imread(source.toStdString());
                 cv::Mat outImage = image.clone();
-                if(image.data){
-                    std::vector<BoxItem> result;
-                    yoloptr->onnxDetect(image, result);
-                    for(auto& boxItem: result){
+
+                if (image.data) {
+                    TimerLog timerLog(QString("图片%1").arg(index), ui->logPlanText);
+
+                    auto objs = trtInfer->forward(cvimg(image));
+
+                    for (auto& obj : objs) {
                         QString labelConf = QString("%1:%2")
-                                                .arg(ui->labelsCombo->itemText(boxItem.label),QString::number(boxItem.conf, 'f', 2));
+                            .arg(ui->labelsCombo->itemText(obj.class_label), QString::number(obj.confidence, 'f', 2));
 
                         cv::putText(outImage, labelConf.toStdString(),
-                                    cv::Point(boxItem.box.x, boxItem.box.y - 20),
-                                    cv::FONT_HERSHEY_SIMPLEX, 2, color, 4, cv::LINE_AA);
+                            cv::Point(obj.left, obj.top - 20),
+                            cv::FONT_HERSHEY_SIMPLEX, 2, color, 4, cv::LINE_AA);
 
-                        cv::rectangle(outImage, boxItem.box, color, 4, cv::LINE_AA);
+                        cv::rectangle(outImage, cv::Rect(obj.left, obj.top, std::abs(obj.right - obj.left), std::abs(obj.bottom - obj.top)), color, 4, cv::LINE_AA);
 
-                        ui->graphicsView->showImg(outImage);
                     }
                 }
-            }catch(const std::exception& e){
-                appendLog(QString("推理失败：%1").arg(e.what()));
+                ui->graphicsView->showImg(outImage);
             }
+            
         }
     });
 }
@@ -160,6 +200,7 @@ void DLPage::appendLog(const QString& str)
 
 void DLPage::closeEvent(QCloseEvent *e)
 {
+    trtInfer = nullptr;
     yoloptr = nullptr;
     e->accept();
 }

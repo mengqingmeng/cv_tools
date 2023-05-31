@@ -7,6 +7,7 @@
 #include <myYolo.h>
 #include <QMessageBox>
 #include "TimerLog.h"
+#include "yolo.hpp"
 
 namespace Ui {
 class DLPage;
@@ -34,6 +35,8 @@ private:
     void appendLog(const QString& str);
 
     unique_ptr<MyYolo> yoloptr = nullptr;
+
+    shared_ptr<yolo::Infer> trtInfer = nullptr;
 
 protected:
     void closeEvent(QCloseEvent* e) override;
