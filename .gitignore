@@ -73,3 +73,6 @@ CMakeLists.txt.user*
 *.exe
 
 /.vs/cv-tools
+/x64/Release
+/release
+/.vs
