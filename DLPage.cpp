@@ -136,6 +136,7 @@ void DLPage::connectSlots()
                     if (image.data) {
                         TimerLog timerLog(QString("图片%1").arg(index), ui->logPlanText);
                         std::vector<BoxItem> result;
+                        yoloptr->changeConf(ui->confSpinBox->value());
                         yoloptr->onnxDetect(image, result);
                         for (auto& boxItem : result) {
                             QString labelConf = QString("%1:%2")
@@ -170,7 +171,7 @@ void DLPage::connectSlots()
 
                 if (image.data) {
                     TimerLog timerLog(QString("图片%1").arg(index), ui->logPlanText);
-
+                    trtInfer->changeConf(ui->confSpinBox->value());
                     auto objs = trtInfer->forward(cvimg(image));
 
                     for (auto& obj : objs) {

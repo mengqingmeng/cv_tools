@@ -552,6 +552,10 @@ class InferImpl : public Infer {
     return true;
   }
 
+  virtual void changeConf(float confidence_threshold){
+    this->confidence_threshold_ = confidence_threshold;
+  }
+
   virtual BoxArray forward(const Image &image, void *stream = nullptr) override {
     auto output = forwards({image}, stream);
     if (output.empty()) return {};

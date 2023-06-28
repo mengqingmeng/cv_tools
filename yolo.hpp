@@ -46,6 +46,7 @@ struct Image {
 
   Image() = default;
   Image(const void *bgrptr, int width, int height) : bgrptr(bgrptr), width(width), height(height) {}
+
 };
 
 typedef std::vector<Box> BoxArray;
@@ -59,6 +60,7 @@ class Infer {
   virtual BoxArray forward(const Image &image, void *stream = nullptr) = 0;
   virtual std::vector<BoxArray> forwards(const std::vector<Image> &images,
                                          void *stream = nullptr) = 0;
+  virtual void changeConf(float confidence_threshold) = 0;
 };
 
 std::shared_ptr<Infer> load(const std::string &engine_file, Type type,
